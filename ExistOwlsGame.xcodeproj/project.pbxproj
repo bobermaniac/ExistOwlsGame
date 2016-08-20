@@ -16,7 +16,7 @@
 		E70F3CB61D5FBBA100662ACB /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70F3CB51D5FBBA100662ACB /* Actor.swift */; };
 		E70F3CB81D5FBBD600662ACB /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70F3CB71D5FBBD600662ACB /* Event.swift */; };
 		E70F3CBA1D5FBBE800662ACB /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70F3CB91D5FBBE800662ACB /* Action.swift */; };
-		E7954AEB1D68833F0077F19A /* PCTextureSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7954AEA1D68833F0077F19A /* PCTextureSheet.swift */; };
+		E7954AEB1D68833F0077F19A /* AnimationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7954AEA1D68833F0077F19A /* AnimationSheet.swift */; };
 		E79832E81D684F77007E9868 /* QuestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79832E71D684F77007E9868 /* QuestScene.swift */; };
 		E79832EC1D6850AC007E9868 /* ExampleQuestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79832EB1D6850AC007E9868 /* ExampleQuestScene.swift */; };
 		E79832EE1D6850CB007E9868 /* ExampleQuestScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E79832ED1D6850CB007E9868 /* ExampleQuestScene.sks */; };
@@ -47,7 +47,7 @@
 		E70F3CB51D5FBBA100662ACB /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		E70F3CB71D5FBBD600662ACB /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		E70F3CB91D5FBBE800662ACB /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
-		E7954AEA1D68833F0077F19A /* PCTextureSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PCTextureSheet.swift; sourceTree = "<group>"; };
+		E7954AEA1D68833F0077F19A /* AnimationSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationSheet.swift; sourceTree = "<group>"; };
 		E79832E71D684F77007E9868 /* QuestScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestScene.swift; sourceTree = "<group>"; };
 		E79832EB1D6850AC007E9868 /* ExampleQuestScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleQuestScene.swift; sourceTree = "<group>"; };
 		E79832ED1D6850CB007E9868 /* ExampleQuestScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExampleQuestScene.sks; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 				E79832E71D684F77007E9868 /* QuestScene.swift */,
 				E79832EB1D6850AC007E9868 /* ExampleQuestScene.swift */,
 				E79832ED1D6850CB007E9868 /* ExampleQuestScene.sks */,
-				E7954AEA1D68833F0077F19A /* PCTextureSheet.swift */,
+				E7954AEA1D68833F0077F19A /* AnimationSheet.swift */,
 			);
 			path = Quest;
 			sourceTree = "<group>";
@@ -264,7 +264,7 @@
 				E70129111D5FA2E400888258 /* AppDelegate.swift in Sources */,
 				E7DD88061D63A75A009B9175 /* InputRhytmProcessor.swift in Sources */,
 				E7DD88041D63A6D3009B9175 /* RunningAnimationPerformer.swift in Sources */,
-				E7954AEB1D68833F0077F19A /* PCTextureSheet.swift in Sources */,
+				E7954AEB1D68833F0077F19A /* AnimationSheet.swift in Sources */,
 				E70F3CB61D5FBBA100662ACB /* Actor.swift in Sources */,
 				E79832E81D684F77007E9868 /* QuestScene.swift in Sources */,
 				E70F3CB81D5FBBD600662ACB /* Event.swift in Sources */,
