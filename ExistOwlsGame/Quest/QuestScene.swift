@@ -48,6 +48,7 @@ class QuestScene : SKScene {
         let location = touch.location(in: self)
         if let spriteUnderTouch = self.nodes(at: location).first as? SKSpriteNode {
             self.events?.eventHandled(.pcMoveToSprite(spriteUnderTouch))
+            return
         }
         self.events?.eventHandled(.pcMoveToPoint(touch.location(in: self)))
     }

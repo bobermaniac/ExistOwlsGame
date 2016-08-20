@@ -58,13 +58,19 @@ class ExampleQuestScene : QuestScene, QuestSceneActors, QuestSceneEvents {
     }
     
     func pcMove(to point: CGPoint) {
-        var animation : Animation?
+        var direction = Direction.Top
         if (abs(point.x - _PC.position.x) < abs(point.y - _PC.position.y)) {
-            animation = point.y > _PC.position.y ? .Walk(.Top) : .Walk(.Bottom)
+            direction = point.y > _PC.position.y ? .Top : .Bottom
         } else {
-            animation = point.x > _PC.position.x ? .Walk(.Left) : .Walk(.Right)
+            direction = point.x > _PC.position.x ? .Left : .Right
         }
         _PC.removeAllActions()
-        _PC.run(_textures.PCAnimation.animation(type: animation!))
+        _PC.run(_textures.PCAnimation.animation(type: .Walk(direction)))
+        let length = point.distance(to: _PC.position)
+        let time = length / 70
+        _PC.run(SKAction.move(to: point, duration: TimeInterval(time)), completion: {
+            self._PC.removeAllActions()
+            self._PC.run(self._textures.PCAnimation.animation(type: .Idle(direction)))
+        });
     }
 }

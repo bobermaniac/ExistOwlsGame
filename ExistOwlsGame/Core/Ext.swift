@@ -6,7 +6,7 @@
 //  Copyright © 2016 Victor Bryksin. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension Sequence {
     func product<T, U>(with second: T, _ productionFunc: (_ first: Self.Iterator.Element, _ second: T.Iterator.Element) -> U) -> [ U ] where T: Sequence {
@@ -24,5 +24,11 @@ extension Sequence {
             dictionary[kv.0] = kv.1
         }
         return dictionary
+    }
+}
+
+extension CGPoint {
+    func distance(to point: CGPoint) -> CGFloat {
+        return sqrt(pow(point.x - self.x, 2) + pow(point.y - self.y, 2))
     }
 }
