@@ -17,6 +17,9 @@
 		E70F3CB81D5FBBD600662ACB /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70F3CB71D5FBBD600662ACB /* Event.swift */; };
 		E70F3CBA1D5FBBE800662ACB /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70F3CB91D5FBBE800662ACB /* Action.swift */; };
 		E7954AEB1D68833F0077F19A /* AnimationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7954AEA1D68833F0077F19A /* AnimationSheet.swift */; };
+		E7954AEE1D69A1330077F19A /* StageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7954AED1D69A1330077F19A /* StageController.swift */; };
+		E7954AF01D69A6250077F19A /* StageActor.State.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7954AEF1D69A6250077F19A /* StageActor.State.swift */; };
+		E7954AF21D69B8160077F19A /* QuestStageControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7954AF11D69B8160077F19A /* QuestStageControllerFactory.swift */; };
 		E79832E81D684F77007E9868 /* QuestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79832E71D684F77007E9868 /* QuestScene.swift */; };
 		E79832EC1D6850AC007E9868 /* ExampleQuestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79832EB1D6850AC007E9868 /* ExampleQuestScene.swift */; };
 		E79832EE1D6850CB007E9868 /* ExampleQuestScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E79832ED1D6850CB007E9868 /* ExampleQuestScene.sks */; };
@@ -48,6 +51,9 @@
 		E70F3CB71D5FBBD600662ACB /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		E70F3CB91D5FBBE800662ACB /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		E7954AEA1D68833F0077F19A /* AnimationSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationSheet.swift; sourceTree = "<group>"; };
+		E7954AED1D69A1330077F19A /* StageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageController.swift; sourceTree = "<group>"; };
+		E7954AEF1D69A6250077F19A /* StageActor.State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageActor.State.swift; sourceTree = "<group>"; };
+		E7954AF11D69B8160077F19A /* QuestStageControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestStageControllerFactory.swift; sourceTree = "<group>"; };
 		E79832E71D684F77007E9868 /* QuestScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestScene.swift; sourceTree = "<group>"; };
 		E79832EB1D6850AC007E9868 /* ExampleQuestScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleQuestScene.swift; sourceTree = "<group>"; };
 		E79832ED1D6850CB007E9868 /* ExampleQuestScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExampleQuestScene.sks; sourceTree = "<group>"; };
@@ -122,6 +128,8 @@
 				E70F3CB51D5FBBA100662ACB /* Actor.swift */,
 				E70F3CB71D5FBBD600662ACB /* Event.swift */,
 				E70F3CB91D5FBBE800662ACB /* Action.swift */,
+				E7954AED1D69A1330077F19A /* StageController.swift */,
+				E7954AEF1D69A6250077F19A /* StageActor.State.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -141,6 +149,7 @@
 				E79832EB1D6850AC007E9868 /* ExampleQuestScene.swift */,
 				E79832ED1D6850CB007E9868 /* ExampleQuestScene.sks */,
 				E7954AEA1D68833F0077F19A /* AnimationSheet.swift */,
+				E7954AF11D69B8160077F19A /* QuestStageControllerFactory.swift */,
 			);
 			path = Quest;
 			sourceTree = "<group>";
@@ -255,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7BB56051D67AD7C003019BE /* LoopIndex.swift in Sources */,
+				E7954AF01D69A6250077F19A /* StageActor.State.swift in Sources */,
 				E70129171D5FA2E400888258 /* TestScene.swift in Sources */,
 				E79832F11D68523C007E9868 /* SKETextureSheet.swift in Sources */,
 				E79832EC1D6850AC007E9868 /* ExampleQuestScene.swift in Sources */,
@@ -266,6 +276,8 @@
 				E7DD88041D63A6D3009B9175 /* RunningAnimationPerformer.swift in Sources */,
 				E7954AEB1D68833F0077F19A /* AnimationSheet.swift in Sources */,
 				E70F3CB61D5FBBA100662ACB /* Actor.swift in Sources */,
+				E7954AEE1D69A1330077F19A /* StageController.swift in Sources */,
+				E7954AF21D69B8160077F19A /* QuestStageControllerFactory.swift in Sources */,
 				E79832E81D684F77007E9868 /* QuestScene.swift in Sources */,
 				E70F3CB81D5FBBD600662ACB /* Event.swift in Sources */,
 				E7BB56031D67AC98003019BE /* AnimationTextureSource.swift in Sources */,

@@ -8,19 +8,19 @@
 
 import Foundation
 
-public protocol ActionProcessing : class {
-    func actionReceived(_ action: Action, from actor: Actor)
+protocol ActionProcessing : class {
+    func actionReceived(_ action: Action, from actor: StageActor)
 }
 
-public protocol ActionFiltering {
+protocol ActionFiltering {
     func satisfiesCondition(action: Action) -> Bool
 }
 
-public protocol EventConsuming {
+protocol EventConsuming {
     func process(event: Event) -> [Action]?
 }
 
-public class ActionRouter {
+class ActionRouter {
     private struct ActionRouterItem {
         public let processor : ActionProcessing
         public let filter : ActionFiltering?
@@ -30,7 +30,7 @@ public class ActionRouter {
             self.filter = filter
         }
         
-        public func process(_ action: Action, from actor: Actor) {
+        public func process(_ action: Action, from actor: StageActor) {
             guard filter == nil || filter!.satisfiesCondition(action: action) else {
                 return
             }
@@ -38,10 +38,10 @@ public class ActionRouter {
         }
     }
     
-    private var subscribers : [ActionRouterItem] = []
-    private unowned var actor : Actor
+    private var subscribers : [ ActionRouterItem ] = []
+    private unowned var actor : StageActor
     
-    public init(actor : Actor) {
+    public init(actor : StageActor) {
         self.actor = actor
     }
     
@@ -58,8 +58,41 @@ public class ActionRouter {
     }
 }
 
-public class Actor : EventConsuming {
+protocol StageActorPresenter : class {
+    weak var controller : StageActor? { get set }
+}
+
+protocol StageActorPresenterFactory {
+    func createActorPresenter() -> StageActorPresenter
+}
+
+class StageActor : EventConsuming {
+    private(set) lazy var presenter : StageActorPresenter? = {
+        let presenter = self.presenterFactory.createActorPresenter()
+        presenter.controller = self
+        return presenter
+    }();
+    
+    init(withPresenterFactory presenterFactory: StageActorPresenterFactory) {
+        self.presenterFactory = presenterFactory
+    }
+    
+    // MARK: state
+    
+    weak var stateObserver: StageActorStateObserver? = nil
+    
+    var state : State = .None {
+        didSet {
+            stateObserver?.actorDidChangeState(self, to: state)
+        }
+    }
+    
+    // MARK: events
+    
     public func process(event: Event) -> [Action]? {
         return nil
     }
+    
+    // MARK: private variables
+    let presenterFactory : StageActorPresenterFactory
 }

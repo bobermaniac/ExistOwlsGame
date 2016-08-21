@@ -20,7 +20,16 @@ class ExampleTextureBatch {
     }
 }
 
-class ExampleQuestScene : QuestScene, QuestSceneActors, QuestSceneEvents {
+class ExampleQuestScene : QuestScene, QuestSceneActors, QuestSceneEvents, StagePresenter {
+    func presentStage(on view: SKView) {
+        self.scaleMode = .aspectFill
+        view.presentScene(self)
+    }
+
+    weak var controller: StageController?
+
+    weak var eventsOutput: StageEventsInput?
+
     private var _textures : ExampleTextureBatch!
     private var _PC : SKSpriteNode!
     private var _mainCamera : SKCameraNode!

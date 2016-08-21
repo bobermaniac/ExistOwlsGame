@@ -12,17 +12,13 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 
+    var stageController = StageController(withStagePresenterFactory: QuestStagePresenterFactory())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            let scene = KittyChaseSceneFactory().makeScene()
-            // Set the scale mode to scale to fit the window
-            scene.scaleMode = .aspectFill
-                
-            // Present the scene
-            view.presentScene(scene)
+            stageController.presenter?.presentStage(on: view)
             
             view.ignoresSiblingOrder = true
             
