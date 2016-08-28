@@ -11,14 +11,14 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
-    var stageController = StageController(withStagePresenterFactory: QuestStagePresenterFactory())
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
-            stageController.presenter?.presentStage(on: view)
+            let scene = ExampleQuestScene(fileNamed: "ExampleQuestScene")
+            scene?.scaleMode = .aspectFill
+            view.presentScene(scene)
             
             view.ignoresSiblingOrder = true
             

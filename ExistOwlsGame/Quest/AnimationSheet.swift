@@ -43,7 +43,7 @@ enum Animation : Hashable {
 }
 
 class TexturesExtractor {
-    typealias ExtractionMethod = (_ sheet: SKETextureSheet) -> [ SKTexture ]
+    typealias ExtractionMethod = (_ sheet: TextureSheet) -> [ SKTexture ]
     
     let extract : ExtractionMethod
     
@@ -53,7 +53,7 @@ class TexturesExtractor {
 }
 
 class AnimationSheet {
-    init(textureSheet sheet: SKETextureSheet) {
+    init(textureSheet sheet: TextureSheet) {
         _textureSheet = sheet
     }
     
@@ -65,7 +65,7 @@ class AnimationSheet {
         return SKAction.repeatForever(SKAction.animate(with: textures, timePerFrame: 0.1))
     }
     
-    private let _textureSheet: SKETextureSheet
+    private let _textureSheet: TextureSheet
     private static let _extractors : [ Animation : TexturesExtractor ] = _createExtractors()
     
     private func _extractTextures(for type: Animation) -> [ SKTexture ] {

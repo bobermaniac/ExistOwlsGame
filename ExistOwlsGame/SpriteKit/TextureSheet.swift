@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class SKETextureSheet {
+class TextureSheet {
     private let _textures: [ Index : SKTexture ]
     private let _rows : Int
     private let _columns : Int

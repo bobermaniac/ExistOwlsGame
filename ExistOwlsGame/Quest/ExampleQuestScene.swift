@@ -9,35 +9,33 @@
 import SpriteKit
 
 class ExampleTextureBatch {
-    let PCSheet : SKETextureSheet
+    let PCSheet : TextureSheet
     let PCAnimation : AnimationSheet
     
     init() {
         let PCSheetTexture = SKTexture(imageNamed: "walking_boy")
-        PCSheet = SKETextureSheet(withSheet: PCSheetTexture, rows: 5, columns: 11)
+        PCSheet = TextureSheet(withSheet: PCSheetTexture, rows: 5, columns: 11)
         
         PCAnimation = AnimationSheet(textureSheet: PCSheet)
     }
 }
 
-class ExampleQuestScene : QuestScene, QuestSceneActors, QuestSceneEvents, StagePresenter {
+class ExampleQuestScene : SKScene {
+    
+    // MARK: - StagePresenter implementation
+
     func presentStage(on view: SKView) {
         self.scaleMode = .aspectFill
         view.presentScene(self)
     }
 
-    weak var controller: StageController?
-
-    weak var eventsOutput: StageEventsInput?
-
+    // MARK: -
+    
     private var _textures : ExampleTextureBatch!
     private var _PC : SKSpriteNode!
     private var _mainCamera : SKCameraNode!
     
     override func didMove(to view: SKView) {
-        self.actors = self
-        self.events = self
-        
         _textures = ExampleTextureBatch()
         
         _PC = childNode(withName: "Sprite_PC") as? SKSpriteNode
@@ -48,23 +46,16 @@ class ExampleQuestScene : QuestScene, QuestSceneActors, QuestSceneEvents, StageP
         _PC.run(_textures.PCAnimation.animation(type: .Idle(.Top)))
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    }
+    
     // MARK: QuestSceneActors implementation
-    var PC: SKSpriteNode {
-        return _PC
-    }
-    
-    var mainCamera: SKCameraNode {
-        return _mainCamera
-    }
-    
-    func eventHandled(_ event: QuestSceneEvent) {
-        switch event {
-        case .pcMoveToPoint(let point):
-            pcMove(to: point)
-        case .pcMoveToSprite(let sprite):
-            pcMove(to: sprite.position)
-        }
-    }
     
     func pcMove(to point: CGPoint) {
         var direction = Direction.Top
