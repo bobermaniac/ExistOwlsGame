@@ -13,6 +13,8 @@
 		E701291C1D5FA2E400888258 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E701291A1D5FA2E400888258 /* Main.storyboard */; };
 		E701291E1D5FA2E400888258 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E701291D1D5FA2E400888258 /* Assets.xcassets */; };
 		E70129211D5FA2E400888258 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E701291F1D5FA2E400888258 /* LaunchScreen.storyboard */; };
+		E78EECAB1D73547700057D15 /* SceneEventRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EECAA1D73547700057D15 /* SceneEventRecognizer.swift */; };
+		E78EECAD1D736AC600057D15 /* SceneAnimationPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EECAC1D736AC600057D15 /* SceneAnimationPerformer.swift */; };
 		E7954AEB1D68833F0077F19A /* AnimationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7954AEA1D68833F0077F19A /* AnimationSheet.swift */; };
 		E79832EC1D6850AC007E9868 /* ExampleQuestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79832EB1D6850AC007E9868 /* ExampleQuestScene.swift */; };
 		E79832EE1D6850CB007E9868 /* ExampleQuestScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E79832ED1D6850CB007E9868 /* ExampleQuestScene.sks */; };
@@ -40,6 +42,8 @@
 		E701291D1D5FA2E400888258 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E70129201D5FA2E400888258 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E70129221D5FA2E400888258 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E78EECAA1D73547700057D15 /* SceneEventRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneEventRecognizer.swift; sourceTree = "<group>"; };
+		E78EECAC1D736AC600057D15 /* SceneAnimationPerformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneAnimationPerformer.swift; sourceTree = "<group>"; };
 		E7954AEA1D68833F0077F19A /* AnimationSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimationSheet.swift; path = ../Quest/AnimationSheet.swift; sourceTree = "<group>"; };
 		E79832EB1D6850AC007E9868 /* ExampleQuestScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleQuestScene.swift; sourceTree = "<group>"; };
 		E79832ED1D6850CB007E9868 /* ExampleQuestScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExampleQuestScene.sks; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 				E79832EB1D6850AC007E9868 /* ExampleQuestScene.swift */,
 				E79832ED1D6850CB007E9868 /* ExampleQuestScene.sks */,
 				E7FD62031D6F754600FF399A /* TouchHandler.swift */,
+				E78EECAA1D73547700057D15 /* SceneEventRecognizer.swift */,
+				E78EECAC1D736AC600057D15 /* SceneAnimationPerformer.swift */,
 			);
 			path = Quest;
 			sourceTree = "<group>";
@@ -233,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E78EECAB1D73547700057D15 /* SceneEventRecognizer.swift in Sources */,
 				E7BB56051D67AD7C003019BE /* LoopIndex.swift in Sources */,
 				E70129171D5FA2E400888258 /* TestScene.swift in Sources */,
 				E79832F11D68523C007E9868 /* TextureSheet.swift in Sources */,
@@ -240,6 +247,7 @@
 				E7DD88091D63AB70009B9175 /* CircularBuffer.swift in Sources */,
 				E70129191D5FA2E400888258 /* GameViewController.swift in Sources */,
 				E70129111D5FA2E400888258 /* AppDelegate.swift in Sources */,
+				E78EECAD1D736AC600057D15 /* SceneAnimationPerformer.swift in Sources */,
 				E7DD88061D63A75A009B9175 /* InputRhytmProcessor.swift in Sources */,
 				E7FD62041D6F754600FF399A /* TouchHandler.swift in Sources */,
 				E7DD88041D63A6D3009B9175 /* RunningAnimationPerformer.swift in Sources */,

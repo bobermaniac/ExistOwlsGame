@@ -47,7 +47,7 @@ class TexturesExtractor {
     
     let extract : ExtractionMethod
     
-    init(extracting method: ExtractionMethod) {
+    init(extracting method: @escaping ExtractionMethod) {
         self.extract = method
     }
 }

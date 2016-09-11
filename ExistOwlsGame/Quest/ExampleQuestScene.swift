@@ -20,22 +20,21 @@ class ExampleTextureBatch {
     }
 }
 
-class ExampleQuestScene : SKScene {
+class ExampleQuestScene : SKScene, SceneEventHandler {
     
-    // MARK: - StagePresenter implementation
-
-    func presentStage(on view: SKView) {
-        self.scaleMode = .aspectFill
-        view.presentScene(self)
-    }
-
+    var eventRecognizer: SceneEventRecognizer = SceneEventRecognizer()
+    var animationPerformer: SceneAnimationPerformer = SceneAnimationPerformer()
     // MARK: -
     
     private var _textures : ExampleTextureBatch!
     private var _PC : SKSpriteNode!
     private var _mainCamera : SKCameraNode!
     
+    
     override func didMove(to view: SKView) {
+        animationPerformer.delegate = eventRecognizer
+        eventRecognizer.delegate = self
+        
         _textures = ExampleTextureBatch()
         
         _PC = childNode(withName: "Sprite_PC") as? SKSpriteNode
@@ -47,30 +46,47 @@ class ExampleQuestScene : SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.eventRecognizer.touchesBegan(touches, on: self)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.eventRecognizer.touchesMoved(touches, on: self)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.eventRecognizer.touchesEnded(touches, on: self)
     }
     
-    // MARK: QuestSceneActors implementation
-    
-    func pcMove(to point: CGPoint) {
-        var direction = Direction.Top
-        if (abs(point.x - _PC.position.x) < abs(point.y - _PC.position.y)) {
-            direction = point.y > _PC.position.y ? .Top : .Bottom
-        } else {
-            direction = point.x > _PC.position.x ? .Left : .Right
+    func handle(sceneEvent: SceneEvent) {
+        switch sceneEvent {
+        case .GoToPoint(point: let point):
+            animationPerformer.perform(animation: .Walk(target: point), on: _PC, sheet: _textures.PCAnimation)
+        case .GoToSprite(sprite: let sprite):
+            animationPerformer.perform(animation: .Walk(target: sprite.position), on: _PC, sheet: _textures.PCAnimation)
+        case .AnimationBegins(animation: let animation):
+            _handlePotentialAnimation(animation)
+        case .AnimationEnded(sprite: let sprite, animation: let animation):
+            _finishAnimation(animation, for: sprite)
+        default: break
         }
+    }
+    
+    func _handlePotentialAnimation(_ animation: PotentialAnimation) {
+        switch animation {
+        case .Move(let info):
+            if info.sprite == _PC {
+                _mainCamera.run(SKAction.springMove(to: info.targetPoint, in: info.time))
+            }
+        }
+    }
+    
+    func _finishAnimation(_ animation: Animation, for sprite: SKSpriteNode) {
         _PC.removeAllActions()
-        _PC.run(_textures.PCAnimation.animation(type: .Walk(direction)))
-        let length = point.distance(to: _PC.position)
-        let time = length / 70
-        _PC.run(SKAction.move(to: point, duration: TimeInterval(time)), completion: {
-            self._PC.removeAllActions()
-            self._PC.run(self._textures.PCAnimation.animation(type: .Idle(direction)))
-        });
+        switch animation {
+        case .Walk(let direction):
+            _PC.run(_textures.PCAnimation.animation(type: .Idle(direction)))
+            _mainCamera.run(SKAction.move(to: _PC.position, duration: 1))
+        default: break
+        }
     }
 }
