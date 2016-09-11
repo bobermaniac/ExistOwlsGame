@@ -11,6 +11,7 @@ import SpriteKit
 enum SceneEvent {
     case GoToPoint(point: CGPoint)
     case GoToSprite(sprite: SKSpriteNode)
+    case Grab(delta: CGSize)
     case AnimationBegins(animation: PotentialAnimation)
     case AnimationEnded(sprite: SKSpriteNode, animation: Animation)
 }
@@ -21,6 +22,8 @@ protocol SceneEventHandler {
 
 class SceneEventRecognizer {
     var delegate: SceneEventHandler? = nil
+    
+    private var _handlesGrab : Bool = false
     
     private func _nodes(beneath touch: UITouch, on scene: SKScene) -> [ SKNode ] {
         return scene.nodes(at: touch.location(in: scene))
@@ -45,10 +48,17 @@ class SceneEventRecognizer {
     }
     
     func touchesMoved(_ touches: Set<UITouch>, on scene: SKScene) {
-        
+        guard let touch = touches.first else { return }
+        let c = touch.location(in: scene)
+        let p = touch.previousLocation(in: scene)
+        let delta = CGSize(width: p.x - c.x, height: p.y - c.y)
+        delegate?.handle(sceneEvent: .Grab(delta: delta))
+        _handlesGrab = true
     }
     
     func touchesEnded(_ touches: Set<UITouch>, on scene: SKScene) {
+        defer { _handlesGrab = false }
+        guard !_handlesGrab else { return }
         guard let touch = touches.first else { return }
         let sprite = _sprites(beneath: touch, on: scene).filter(_isActor).sorted(by: _isFirstSpriteHasGreaterZPos).first
         if let sprite = sprite {

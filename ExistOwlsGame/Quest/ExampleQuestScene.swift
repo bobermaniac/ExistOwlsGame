@@ -67,7 +67,9 @@ class ExampleQuestScene : SKScene, SceneEventHandler {
             _handlePotentialAnimation(animation)
         case .AnimationEnded(sprite: let sprite, animation: let animation):
             _finishAnimation(animation, for: sprite)
-        default: break
+        case .Grab(delta: let delta):
+            _mainCamera.position = CGPoint(x: _mainCamera.position.x + delta.width,
+                                           y: _mainCamera.position.y + delta.height)
         }
     }
     
