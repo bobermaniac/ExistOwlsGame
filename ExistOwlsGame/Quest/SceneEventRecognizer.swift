@@ -9,11 +9,16 @@
 import SpriteKit
 
 enum SceneEvent {
-    case GoToPoint(point: CGPoint)
-    case GoToSprite(sprite: SKSpriteNode)
-    case Grab(delta: CGSize)
+    case Tap(point: CGPoint, sprite: SKSpriteNode?)
+    case Grab(sprite: SKSpriteNode)
+    case Drag(delta: CGSize, sprite: SKSpriteNode?)
+    case Drop
     case AnimationBegins(animation: PotentialAnimation)
     case AnimationEnded(sprite: SKSpriteNode, animation: Animation)
+}
+
+enum Intent {
+    
 }
 
 protocol SceneEventHandler {
@@ -52,7 +57,7 @@ class SceneEventRecognizer {
         let c = touch.location(in: scene)
         let p = touch.previousLocation(in: scene)
         let delta = CGSize(width: p.x - c.x, height: p.y - c.y)
-        delegate?.handle(sceneEvent: .Grab(delta: delta))
+        delegate?.handle(sceneEvent: .Drag(delta: delta, sprite: nil))
         _handlesGrab = true
     }
     
@@ -61,11 +66,8 @@ class SceneEventRecognizer {
         guard !_handlesGrab else { return }
         guard let touch = touches.first else { return }
         let sprite = _sprites(beneath: touch, on: scene).filter(_isActor).sorted(by: _isFirstSpriteHasGreaterZPos).first
-        if let sprite = sprite {
-            delegate?.handle(sceneEvent: .GoToSprite(sprite: sprite))
-        } else {
-            delegate?.handle(sceneEvent: .GoToPoint(point: touch.location(in: scene)))
-        }
+        let location = touch.location(in: scene)
+        delegate?.handle(sceneEvent: .Tap(point: location, sprite: sprite))
     }
     
     func animationWillBegin(_ animation: PotentialAnimation) {

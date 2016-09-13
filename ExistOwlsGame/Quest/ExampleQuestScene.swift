@@ -59,17 +59,16 @@ class ExampleQuestScene : SKScene, SceneEventHandler {
     
     func handle(sceneEvent: SceneEvent) {
         switch sceneEvent {
-        case .GoToPoint(point: let point):
-            animationPerformer.perform(animation: .Walk(target: point), on: _PC, sheet: _textures.PCAnimation)
-        case .GoToSprite(sprite: let sprite):
-            animationPerformer.perform(animation: .Walk(target: sprite.position), on: _PC, sheet: _textures.PCAnimation)
+        case .Tap(point: let point, sprite: let sprite):
+            animationPerformer.perform(animation: .Walk(target: sprite?.position ?? point), on: _PC, sheet: _textures.PCAnimation)
         case .AnimationBegins(animation: let animation):
             _handlePotentialAnimation(animation)
         case .AnimationEnded(sprite: let sprite, animation: let animation):
             _finishAnimation(animation, for: sprite)
-        case .Grab(delta: let delta):
+        case .Drag(delta: let delta, sprite: _):
             _mainCamera.position = CGPoint(x: _mainCamera.position.x + delta.width,
                                            y: _mainCamera.position.y + delta.height)
+        default: break
         }
     }
     
