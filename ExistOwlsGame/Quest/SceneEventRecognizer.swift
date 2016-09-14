@@ -14,11 +14,7 @@ enum SceneEvent {
     case Drag(delta: CGSize, sprite: SKSpriteNode?)
     case Drop
     case AnimationBegins(animation: PotentialAnimation)
-    case AnimationEnded(sprite: SKSpriteNode, animation: Animation)
-}
-
-enum Intent {
-    
+    case AnimationEnded(sprite: SKSpriteNode, intent: Intent)
 }
 
 protocol SceneEventHandler {
@@ -74,7 +70,7 @@ class SceneEventRecognizer {
         delegate?.handle(sceneEvent: .AnimationBegins(animation: animation))
     }
     
-    func animationEnded(for sprite: SKSpriteNode, ofKind kind: Animation) {
-        delegate?.handle(sceneEvent: .AnimationEnded(sprite: sprite, animation: kind))
+    func animationEnded(for sprite: SKSpriteNode, intented intent: Intent) {
+        delegate?.handle(sceneEvent: .AnimationEnded(sprite: sprite, intent: intent))
     }
 }

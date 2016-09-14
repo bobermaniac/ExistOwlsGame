@@ -58,13 +58,15 @@ class ExampleQuestScene : SKScene, SceneEventHandler {
     }
     
     func handle(sceneEvent: SceneEvent) {
+        let performer = animationPerformer.initiatedBy(sceneEvent)
         switch sceneEvent {
         case .Tap(point: let point, sprite: let sprite):
-            animationPerformer.perform(animation: .Walk(target: sprite?.position ?? point), on: _PC, sheet: _textures.PCAnimation)
+            let animation = PerformingAnimation(forSprite: _PC, type: .Walk(target: sprite?.position ?? point))
+            performer.perform(animation: animation, using: _textures.PCAnimation)
         case .AnimationBegins(animation: let animation):
             _handlePotentialAnimation(animation)
-        case .AnimationEnded(sprite: let sprite, animation: let animation):
-            _finishAnimation(animation, for: sprite)
+        case .AnimationEnded(sprite: let sprite, intent: _):
+            _finishAnimation(for: sprite)
         case .Drag(delta: let delta, sprite: _):
             _mainCamera.position = CGPoint(x: _mainCamera.position.x + delta.width,
                                            y: _mainCamera.position.y + delta.height)
@@ -81,13 +83,8 @@ class ExampleQuestScene : SKScene, SceneEventHandler {
         }
     }
     
-    func _finishAnimation(_ animation: Animation, for sprite: SKSpriteNode) {
-        _PC.removeAllActions()
-        switch animation {
-        case .Walk(let direction):
-            _PC.run(_textures.PCAnimation.animation(type: .Idle(direction)))
-            _mainCamera.run(SKAction.move(to: _PC.position, duration: 1))
-        default: break
-        }
+    func _finishAnimation(for sprite: SKSpriteNode) {
+        _PC.run(_textures.PCAnimation.animation(type: .Idle(.Top)))
+        _mainCamera.run(SKAction.move(to: _PC.position, duration: 1))
     }
 }
