@@ -20,10 +20,9 @@ class ExampleTextureBatch {
     }
 }
 
-class ExampleQuestScene : SKScene, SceneEventHandler {
-    
+class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
     var eventRecognizer: SceneEventRecognizer = SceneEventRecognizer()
-    var animationPerformer: SceneAnimationPerformer = SceneAnimationPerformer()
+    var animationPerformer: AnimationPerformerWithCompletion = SKSceneAnimationPerformer()
     // MARK: -
     
     private var _textures : ExampleTextureBatch!
@@ -32,8 +31,8 @@ class ExampleQuestScene : SKScene, SceneEventHandler {
     
     
     override func didMove(to view: SKView) {
-        animationPerformer.delegate = eventRecognizer
         eventRecognizer.delegate = self
+        animationPerformer.events = self
         
         _textures = ExampleTextureBatch()
         
@@ -42,7 +41,7 @@ class ExampleQuestScene : SKScene, SceneEventHandler {
         
         _mainCamera = childNode(withName: "mainCamera") as? SKCameraNode
         
-        _PC.run(_textures.PCAnimation.animation(type: .Idle(.Top)))
+        _PC.run(_textures.PCAnimation.animation(type: .idleTop))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -57,34 +56,52 @@ class ExampleQuestScene : SKScene, SceneEventHandler {
         self.eventRecognizer.touchesEnded(touches, on: self)
     }
     
-    func handle(sceneEvent: SceneEvent) {
-        let performer = animationPerformer.initiatedBy(sceneEvent)
-        switch sceneEvent {
-        case .Tap(point: let point, sprite: let sprite):
-            let animation = PerformingAnimation(forSprite: _PC, type: .Walk(target: sprite?.position ?? point))
-            performer.perform(animation: animation, using: _textures.PCAnimation)
-        case .AnimationBegins(animation: let animation):
-            _handlePotentialAnimation(animation)
-        case .AnimationEnded(sprite: let sprite, intent: _):
-            _finishAnimation(for: sprite)
-        case .Drag(delta: let delta, sprite: _):
-            _mainCamera.position = CGPoint(x: _mainCamera.position.x + delta.width,
-                                           y: _mainCamera.position.y + delta.height)
-        default: break
-        }
+    // MARK: - AnimationEventRecognizer implementation
+    
+    func command(_ type: AnimationCommand, startedOn animatable: Animatable, causedBy event: Event) {
+        
     }
     
-    func _handlePotentialAnimation(_ animation: PotentialAnimation) {
-        switch animation {
-        case .Move(let info):
-            if info.sprite == _PC {
-                _mainCamera.run(SKAction.springMove(to: info.targetPoint, in: info.time))
+    func command(_ type: AnimationCommand, finishedOn animatable: Animatable, causedBy event: Event) {
+        let performer = animationPerformer.by(.executed(command: type))
+        switch type {
+        case .walk(targetPoint: _):
+            performer.perform(command: .idle, on: animatable, using: _textures.PCAnimation)
+        default:
+            break
+        }
+
+    }
+    
+    // MARK: - EventHandler implementation
+    
+    func handle(event: Event) {
+        let performer = animationPerformer.by(event)
+        switch event {
+        case .tap(point: let point, sprite: let optionalSprite):
+            if let sprite = optionalSprite {
+                _doPC(goto: sprite, with: performer)
+            } else {
+                _doPC(goto: Point2D(point), with: performer)
             }
+        case .drag(delta: let delta, sprite: _):
+            _doCamera(drag: delta)
+        default:
+            break
         }
     }
     
-    func _finishAnimation(for sprite: SKSpriteNode) {
-        _PC.run(_textures.PCAnimation.animation(type: .Idle(.Top)))
-        _mainCamera.run(SKAction.move(to: _PC.position, duration: 1))
+    // MARK: - Animations
+    
+    private func _doPC(goto point: Point2D, with performer: AnimationPerformer) {
+        performer.perform(command: .walk(targetPoint: point), on: _PC, using: _textures.PCAnimation)
+    }
+    
+    private func _doPC(goto sprite: SKSpriteNode, with performer: AnimationPerformer) {
+        
+    }
+    
+    private func _doCamera(drag offset: CGSize) {
+        _mainCamera.position = _mainCamera.position.applying(CGAffineTransform.init(translationX: offset.width, y: offset.height))
     }
 }

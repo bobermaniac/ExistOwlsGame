@@ -8,40 +8,6 @@
 
 import SpriteKit
 
-enum Direction : Int {
-    case Left
-    case Right
-    case Top
-    case Bottom
-}
-
-enum Animation : Hashable {
-    case Idle(Direction)
-    case Walk(Direction)
-    
-    var hashValue: Int {
-        switch self {
-        case .Idle(let direction):
-            return 17 ^ direction.hashValue
-        case .Walk(let direction):
-            return 91 ^ direction.hashValue
-        }
-    }
-    
-    private var typeCode : Int {
-        switch self {
-        case .Idle(let direction):
-            return direction.rawValue
-        case .Walk(let direction):
-            return 10 + direction.rawValue
-        }
-    }
-    
-    static func ==(lhs: Animation, rhs: Animation) -> Bool {
-        return lhs.typeCode == rhs.typeCode
-    }
-}
-
 class TexturesExtractor {
     typealias ExtractionMethod = (_ sheet: TextureSheet) -> [ SKTexture ]
     
@@ -66,31 +32,52 @@ class AnimationSheet {
     }
     
     private let _textureSheet: TextureSheet
-    private static let _extractors : [ Animation : TexturesExtractor ] = _createExtractors()
     
     private func _extractTextures(for type: Animation) -> [ SKTexture ] {
         return AnimationSheet._extractors[type]?.extract(_textureSheet) ?? []
     }
     
+    private static let _extractors : [ Animation : TexturesExtractor ] = _createExtractors()   
+    
+    private class func _at(row: Int, column: Int) -> TexturesExtractor.ExtractionMethod {
+        return { [ $0.texture(row: row, column: column) ] }
+    }
+    
+    private class func _in(row: Int) -> TexturesExtractor.ExtractionMethod {
+        return { $0.textures(inRow: row) }
+    }
+    
+    private class func _extractor(row: Int, column: Int) -> TexturesExtractor {
+        return TexturesExtractor(extracting: _at(row: row, column: column))
+    }
+    
+    private class func _extractor(row: Int) -> TexturesExtractor {
+        return TexturesExtractor(extracting: _in(row: row))
+    }
+    
     private class func _createExtractors() -> [ Animation : TexturesExtractor ] {
-        let idleLeft = TexturesExtractor(extracting: { [ $0.texture(row:4, column: 1) ] })
-        let idleRight = TexturesExtractor(extracting: { [ $0.texture(row:4, column: 3) ] })
-        let idleTop = TexturesExtractor(extracting: { [ $0.texture(row:4, column: 2) ] })
-        let idleBottom = TexturesExtractor(extracting: { [ $0.texture(row:4, column: 0) ] })
-        
-        let walkLeft = TexturesExtractor(extracting: { $0.textures(inRow: 3) })
-        let walkRight = TexturesExtractor(extracting: { $0.textures(inRow: 2) })
-        let walkTop = TexturesExtractor(extracting: { $0.textures(inRow: 1) })
-        let walkBottom = TexturesExtractor(extracting: { $0.textures(inRow: 0) })
         return [
-            Animation.Idle(.Left) : idleLeft,
-            Animation.Idle(.Right) : idleRight,
-            Animation.Idle(.Top) : idleTop,
-            Animation.Idle(.Bottom) : idleBottom,
-            Animation.Walk(.Left) : walkLeft,
-            Animation.Walk(.Right) : walkRight,
-            Animation.Walk(.Top) : walkTop,
-            Animation.Walk(.Bottom) : walkBottom,
+            Animation.idleLeft : _extractor(row: 4, column: 1),
+            Animation.idleRight : _extractor(row: 4, column: 3),
+            Animation.idleTop : _extractor(row: 4, column: 2),
+            Animation.idleBottom : _extractor(row: 4, column: 0),
+            Animation.walkLeft : _extractor(row: 3),
+            Animation.walkRight : _extractor(row: 2),
+            Animation.walkTop : _extractor(row: 1),
+            Animation.walkBottom : _extractor(row: 0),
         ];
+    }
+}
+
+extension AnimationSheet {
+    public enum Animation : String {
+        case idleLeft = "idle left"
+        case idleRight = "idle right"
+        case idleTop = "idle top"
+        case idleBottom = "idle bottom"
+        case walkLeft = "walk left"
+        case walkTop = "walk top"
+        case walkRight = "walk right"
+        case walkBottom = "walk bottom"
     }
 }

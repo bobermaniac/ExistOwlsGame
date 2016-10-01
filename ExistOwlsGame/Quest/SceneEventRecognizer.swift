@@ -8,21 +8,36 @@
 
 import SpriteKit
 
-enum SceneEvent {
-    case Tap(point: CGPoint, sprite: SKSpriteNode?)
-    case Grab(sprite: SKSpriteNode)
-    case Drag(delta: CGSize, sprite: SKSpriteNode?)
-    case Drop
-    case AnimationBegins(animation: PotentialAnimation)
-    case AnimationEnded(sprite: SKSpriteNode, intent: Intent)
+enum Event {
+    case nae
+    case tap(point: CGPoint, sprite: SKSpriteNode?)
+    case grab(sprite: SKSpriteNode)
+    case drag(delta: CGSize, sprite: SKSpriteNode?)
+    case drop
+    case executed(command: AnimationCommand)
 }
 
-protocol SceneEventHandler {
-    func handle(sceneEvent: SceneEvent)
+protocol EventHandler {
+    func handle(event: Event)
 }
 
-class SceneEventRecognizer {
-    var delegate: SceneEventHandler? = nil
+protocol UserInputEventRecognizer : class {
+    func touchesBegan(_ touches: Set<UITouch>, on scene: SKScene)
+    func touchesMoved(_ touches: Set<UITouch>, on scene: SKScene)
+    func touchesEnded(_ touches: Set<UITouch>, on scene: SKScene)
+}
+
+protocol SystemEventRecognizer : class {
+    func update(_ time: TimeInterval)
+}
+
+protocol AnimationEventRecognizer : class {
+    func command(_ type: AnimationCommand, startedOn animatable: Animatable, causedBy event: Event)
+    func command(_ type: AnimationCommand, finishedOn animatable: Animatable, causedBy event: Event)
+}
+
+class SceneEventRecognizer : UserInputEventRecognizer {
+    var delegate: EventHandler? = nil
     
     private var _handlesGrab : Bool = false
     
@@ -53,7 +68,7 @@ class SceneEventRecognizer {
         let c = touch.location(in: scene)
         let p = touch.previousLocation(in: scene)
         let delta = CGSize(width: p.x - c.x, height: p.y - c.y)
-        delegate?.handle(sceneEvent: .Drag(delta: delta, sprite: nil))
+        delegate?.handle(event: .drag(delta: delta, sprite: nil))
         _handlesGrab = true
     }
     
@@ -63,14 +78,6 @@ class SceneEventRecognizer {
         guard let touch = touches.first else { return }
         let sprite = _sprites(beneath: touch, on: scene).filter(_isActor).sorted(by: _isFirstSpriteHasGreaterZPos).first
         let location = touch.location(in: scene)
-        delegate?.handle(sceneEvent: .Tap(point: location, sprite: sprite))
-    }
-    
-    func animationWillBegin(_ animation: PotentialAnimation) {
-        delegate?.handle(sceneEvent: .AnimationBegins(animation: animation))
-    }
-    
-    func animationEnded(for sprite: SKSpriteNode, intented intent: Intent) {
-        delegate?.handle(sceneEvent: .AnimationEnded(sprite: sprite, intent: intent))
+        delegate?.handle(event: .tap(point: location, sprite: sprite))
     }
 }
