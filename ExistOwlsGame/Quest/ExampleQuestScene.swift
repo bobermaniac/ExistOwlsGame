@@ -98,7 +98,7 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
     }
     
     private func _doPC(goto sprite: SKSpriteNode, with performer: AnimationPerformer) {
-        
+        _doPC(goto: sprite.position2d, with: performer)
     }
     
     private func _doCamera(drag offset: CGSize) {
