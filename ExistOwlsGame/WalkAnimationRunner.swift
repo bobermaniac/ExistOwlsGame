@@ -24,7 +24,7 @@ class WalkAnimationRunner : AnimationRunner {
     }
     
     func run(on animatable: Animatable, sheet: AnimationSheet?, completion: @escaping AnimationPerformerCompletion) {
-        guard let sheet = sheet else { return }
+        let sheet = sheet!
         
         let length = _point.distance(to: animatable.position2d)
         let direction = _directionQualifier.direction(from: animatable.position2d, to: _point)

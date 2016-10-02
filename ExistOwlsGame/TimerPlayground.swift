@@ -9,16 +9,15 @@
 import Foundation
 
 class TimerPlayground: SystemEventRecognizer {
-    private struct TimerPlaygroundEventHandler: EventHandler {
+    private struct TimerPlaygroundEventHandler: TimerEventHandler {
         private unowned let playground: TimerPlayground
         
         init(playground: TimerPlayground) {
             self.playground = playground
         }
         
-        func handle(event: Event) {
-            guard case let .timer(name) = event else { return }
-            playground._onTimer(name: name)
+        func onTimerExausted(_ timer: Timer) {
+            playground._onTimer(name: timer.name)
         }
     }
     

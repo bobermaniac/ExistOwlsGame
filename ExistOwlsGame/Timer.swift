@@ -8,9 +8,16 @@
 
 import Foundation
 
+protocol TimerEventHandler {
+    func onTimerExausted(_ timer: Timer)
+}
+
 class Timer {
-    var handler: EventHandler? = nil
+    var handler: TimerEventHandler? = nil
+    
     let name: String
+    let repeating: Bool
+    let interval: TimeInterval
     
     private(set) var elapsed: TimeInterval
     
@@ -26,13 +33,10 @@ class Timer {
         
         self.elapsed -= interval
         if self.elapsed <= 0 {
-            handler?.handle(event: .timer(name: name))
+            handler?.onTimerExausted(self)
             if repeating {
                 elapsed = self.interval - elapsed
             }
         }
     }
-    
-    private let repeating: Bool
-    private let interval: TimeInterval
 }
