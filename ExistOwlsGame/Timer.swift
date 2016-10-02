@@ -12,7 +12,7 @@ class Timer {
     var handler: EventHandler? = nil
     let name: String
     
-    private var elapsed: TimeInterval
+    var elapsed: TimeInterval
     
     init(withName name: String, elapsed: TimeInterval) {
         self.elapsed = elapsed

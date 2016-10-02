@@ -31,3 +31,7 @@ struct Transition2D {
         return CGSize(width: dx, height: dy)
     }
 }
+
+func +(lhs: Point2D, rhs: Transition2D) -> Point2D {
+    return Point2D(x: lhs.x + rhs.dx, y: lhs.y + rhs.dy)
+}

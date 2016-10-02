@@ -27,6 +27,10 @@ class TimerPlayground: SystemEventRecognizer {
     private var timers: [ Timer ] = []
     
     func createTimer(name: String, elapsed: TimeInterval) {
+        if let timer = timers.first(where: { timer in timer.name == name }) {
+            timer.elapsed = elapsed
+            return
+        }
         let timer = Timer(withName: name, elapsed: elapsed)
         timer.handler = TimerPlaygroundEventHandler(playground: self)
         timers.append(timer)

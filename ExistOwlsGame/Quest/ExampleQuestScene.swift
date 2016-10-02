@@ -39,11 +39,10 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
         _textures = ExampleTextureBatch()
         
         _PC = childNode(withName: "Sprite_PC") as? SKSpriteNode
-        _PC.texture = _textures.PCSheet.texture(row: 0, column: 0)
+        _PC.direction = .bottom
+        _doPC(idleWith: animationPerformer.by(.nae))
         
         _mainCamera = childNode(withName: "mainCamera") as? SKCameraNode
-        
-        _PC.run(_textures.PCAnimation.animation(type: .idleTop))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -61,8 +60,10 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
     private var lastTime: TimeInterval? = nil
     
     override func update(_ currentTime: TimeInterval) {
-        guard let lastTime = self.lastTime else {
+        defer {
             self.lastTime = currentTime
+        }
+        guard let lastTime = self.lastTime else {
             return
         }
         timerPlayground.update(currentTime - lastTime)
@@ -75,7 +76,7 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
         
         switch type {
         case .idle:
-            timerPlayground.createTimer(name: "idle", elapsed: 3)
+            timerPlayground.createTimer(name: "idle", elapsed: 1)
             break
         default:
             break
@@ -89,6 +90,11 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
         switch type {
         case .walk(targetPoint: _):
             _doPC(command: .idle, with: performer)
+            if case let .tap(point: _, animatable: target) = event {
+                if let target = target {
+                    target.position2d = target.position2d + Transition2D(dx: 0, dy: -10)
+                }
+            }
         default:
             break
         }
@@ -109,7 +115,8 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
             _doCamera(drag: delta)
         case .timer(name: let name):
             if name == "idle" {
-                
+                _PC.direction = _PC.direction.nextCW
+                _doPC(idleWith: performer)
             }
         default:
             break
@@ -131,6 +138,7 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
     }
     
     private func _doPC(command: AnimationCommand, with performer: AnimationPerformer) {
+        timerPlayground.dismissTimer(name: "idle")
         performer.perform(command: command, on: _PC, using: _textures.PCAnimation)
     }
 

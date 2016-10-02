@@ -12,7 +12,12 @@ extension SKSpriteNode : Animatable {
     private static let directionKey = "direction"
     
     var position2d: Point2D {
-        return Point2D(x: Double(position.x), y: Double(position.y))
+        get {
+            return Point2D(x: Double(position.x), y: Double(position.y))
+        }
+        set(value) {
+            self.position = value.cgPoint
+        }
     }
     
     var direction: Direction {

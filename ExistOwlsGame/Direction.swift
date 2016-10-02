@@ -13,4 +13,13 @@ enum Direction {
     case bottom
     case left
     case right
+    
+    var nextCW: Direction {
+        switch self {
+        case .top: return .right
+        case .right: return .bottom
+        case .bottom: return .left
+        case .left: return .top
+        }
+    }
 }

@@ -9,7 +9,7 @@
 import SpriteKit
 
 protocol Animatable: class {
-    var position2d: Point2D { get }
+    var position2d: Point2D { get set }
     var direction: Direction { get set }
     
     func run(_ action: SKAction)
