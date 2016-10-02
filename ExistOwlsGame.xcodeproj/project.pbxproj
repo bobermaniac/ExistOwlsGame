@@ -19,6 +19,7 @@
 		E717A95F1DA1377900817285 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A95E1DA1377900817285 /* Timer.swift */; };
 		E717A9611DA1388E00817285 /* SystemEventRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A9601DA1388E00817285 /* SystemEventRecognizer.swift */; };
 		E717A9631DA138AA00817285 /* TimerPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A9621DA138AA00817285 /* TimerPlayground.swift */; };
+		E72FA68D1DA17E47004A93BC /* MoveAnimationRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72FA68C1DA17E47004A93BC /* MoveAnimationRunner.swift */; };
 		E76C1A081D911EF200941B4A /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A071D911EF200941B4A /* Animation.swift */; };
 		E76C1A0A1D911F0900941B4A /* AnimationPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A091D911F0900941B4A /* AnimationPerformer.swift */; };
 		E76C1A0C1D91AE9E00941B4A /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A0B1D91AE9E00941B4A /* Animatable.swift */; };
@@ -31,7 +32,7 @@
 		E76C1A1F1D91C58500941B4A /* DefaultDirectionQualifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A1E1D91C58500941B4A /* DefaultDirectionQualifier.swift */; };
 		E76C1A211D91C6D100941B4A /* AnimationRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A201D91C6D100941B4A /* AnimationRunner.swift */; };
 		E76C1A231D91C71500941B4A /* IdleAnimationRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A221D91C71500941B4A /* IdleAnimationRunner.swift */; };
-		E76C1A251D91C77700941B4A /* MoveAnimationRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A241D91C77700941B4A /* MoveAnimationRunner.swift */; };
+		E76C1A251D91C77700941B4A /* WalkAnimationRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A241D91C77700941B4A /* WalkAnimationRunner.swift */; };
 		E78EECAB1D73547700057D15 /* SceneEventRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EECAA1D73547700057D15 /* SceneEventRecognizer.swift */; };
 		E78EECAD1D736AC600057D15 /* SKSceneAnimationPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EECAC1D736AC600057D15 /* SKSceneAnimationPerformer.swift */; };
 		E7954AEB1D68833F0077F19A /* AnimationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7954AEA1D68833F0077F19A /* AnimationSheet.swift */; };
@@ -66,6 +67,7 @@
 		E717A95E1DA1377900817285 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		E717A9601DA1388E00817285 /* SystemEventRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemEventRecognizer.swift; sourceTree = "<group>"; };
 		E717A9621DA138AA00817285 /* TimerPlayground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerPlayground.swift; sourceTree = "<group>"; };
+		E72FA68C1DA17E47004A93BC /* MoveAnimationRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveAnimationRunner.swift; sourceTree = "<group>"; };
 		E76C1A071D911EF200941B4A /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		E76C1A091D911F0900941B4A /* AnimationPerformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationPerformer.swift; sourceTree = "<group>"; };
 		E76C1A0B1D91AE9E00941B4A /* Animatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
@@ -78,7 +80,7 @@
 		E76C1A1E1D91C58500941B4A /* DefaultDirectionQualifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDirectionQualifier.swift; sourceTree = "<group>"; };
 		E76C1A201D91C6D100941B4A /* AnimationRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationRunner.swift; sourceTree = "<group>"; };
 		E76C1A221D91C71500941B4A /* IdleAnimationRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleAnimationRunner.swift; sourceTree = "<group>"; };
-		E76C1A241D91C77700941B4A /* MoveAnimationRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveAnimationRunner.swift; sourceTree = "<group>"; };
+		E76C1A241D91C77700941B4A /* WalkAnimationRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkAnimationRunner.swift; sourceTree = "<group>"; };
 		E78EECAA1D73547700057D15 /* SceneEventRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneEventRecognizer.swift; sourceTree = "<group>"; };
 		E78EECAC1D736AC600057D15 /* SKSceneAnimationPerformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKSceneAnimationPerformer.swift; path = Quest/SKSceneAnimationPerformer.swift; sourceTree = "<group>"; };
 		E7954AEA1D68833F0077F19A /* AnimationSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimationSheet.swift; path = ../Quest/AnimationSheet.swift; sourceTree = "<group>"; };
@@ -209,7 +211,8 @@
 				E76C1A0D1D91C36500941B4A /* AnimationPerformerInitiatedWrapper.swift */,
 				E76C1A1E1D91C58500941B4A /* DefaultDirectionQualifier.swift */,
 				E76C1A221D91C71500941B4A /* IdleAnimationRunner.swift */,
-				E76C1A241D91C77700941B4A /* MoveAnimationRunner.swift */,
+				E76C1A241D91C77700941B4A /* WalkAnimationRunner.swift */,
+				E72FA68C1DA17E47004A93BC /* MoveAnimationRunner.swift */,
 			);
 			name = Implementation;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				E70129171D5FA2E400888258 /* TestScene.swift in Sources */,
 				E79832F11D68523C007E9868 /* TextureSheet.swift in Sources */,
 				E717A95C1DA1356400817285 /* Transition2D.swift in Sources */,
+				E72FA68D1DA17E47004A93BC /* MoveAnimationRunner.swift in Sources */,
 				E79832EC1D6850AC007E9868 /* ExampleQuestScene.swift in Sources */,
 				E7DD88091D63AB70009B9175 /* CircularBuffer.swift in Sources */,
 				E70129191D5FA2E400888258 /* GameViewController.swift in Sources */,
@@ -364,7 +368,7 @@
 				E70129111D5FA2E400888258 /* AppDelegate.swift in Sources */,
 				E78EECAD1D736AC600057D15 /* SKSceneAnimationPerformer.swift in Sources */,
 				E7DD88061D63A75A009B9175 /* InputRhytmProcessor.swift in Sources */,
-				E76C1A251D91C77700941B4A /* MoveAnimationRunner.swift in Sources */,
+				E76C1A251D91C77700941B4A /* WalkAnimationRunner.swift in Sources */,
 				E76C1A081D911EF200941B4A /* Animation.swift in Sources */,
 				E7DD88041D63A6D3009B9175 /* RunningAnimationPerformer.swift in Sources */,
 				E717A95F1DA1377900817285 /* Timer.swift in Sources */,

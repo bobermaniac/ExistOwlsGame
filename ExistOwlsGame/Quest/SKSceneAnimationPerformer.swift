@@ -11,13 +11,15 @@ import SpriteKit
 class SKSceneAnimationPerformer : AnimationPerformerWithCompletion {
     var events: AnimationEventRecognizer?
     
-    func perform(command: AnimationCommand, on animatable: Animatable, using sheet: AnimationSheet, complete: @escaping AnimationPerformerCompletion) {
+    func perform(command: AnimationCommand, on animatable: Animatable, using sheet: AnimationSheet?, complete: @escaping AnimationPerformerCompletion) {
         var runner: AnimationRunner?
         switch command {
         case .idle:
             runner = IdleAnimationRunner(direction: animatable.direction)
         case .walk(let targetPoint):
-            runner = MoveAnimationRunner(targetPoint: targetPoint)
+            runner = WalkAnimationRunner(targetPoint: targetPoint)
+        case .move(targetPoint: let targetPoint, time: let time):
+            runner = MoveAnimationRunner(targetPoint: targetPoint, time: time)
         }
         runner?.run(on: animatable, sheet: sheet, completion: complete)
     }

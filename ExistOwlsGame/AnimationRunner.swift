@@ -9,5 +9,5 @@
 import Foundation
 
 protocol AnimationRunner {
-    func run(on animatable: Animatable, sheet: AnimationSheet, completion: @escaping AnimationPerformerCompletion)
+    func run(on animatable: Animatable, sheet: AnimationSheet?, completion: @escaping AnimationPerformerCompletion)
 }

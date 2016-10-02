@@ -29,7 +29,7 @@ class AnimationPerformerInitiatedWrapper : AnimationPerformer {
         _event = event
     }
     
-    func perform(command: AnimationCommand, on animatable: Animatable, using sheet: AnimationSheet) {
+    func perform(command: AnimationCommand, on animatable: Animatable, using sheet: AnimationSheet?) {
         let complete = _onComplete(command: command, on: animatable)
         self.events?.command(command, startedOn: animatable, causedBy: _event)
         _performer.perform(command: command, on: animatable, using: sheet, complete: complete)
@@ -39,7 +39,7 @@ class AnimationPerformerInitiatedWrapper : AnimationPerformer {
 extension AnimationPerformerWithCompletion {
     private func _nop() { }
     
-    func perform(command: AnimationCommand, on animatable: Animatable, using sheet: AnimationSheet) {
+    func perform(command: AnimationCommand, on animatable: Animatable, using sheet: AnimationSheet?) {
         self.perform(command: command, on: animatable, using: sheet, complete: _nop)
     }
     

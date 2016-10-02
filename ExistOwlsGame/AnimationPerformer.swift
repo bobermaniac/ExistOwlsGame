@@ -13,7 +13,7 @@ typealias AnimationPerformerCompletion = () -> Void
 protocol AnimationPerformer {
     var events: AnimationEventRecognizer? { get set }
     
-    func perform(command: AnimationCommand, on animatable: Animatable, using sheet: AnimationSheet)
+    func perform(command: AnimationCommand, on animatable: Animatable, using sheet: AnimationSheet?)
 }
 
 protocol InitiatedAnimationPerformer {
@@ -21,5 +21,5 @@ protocol InitiatedAnimationPerformer {
 }
 
 protocol AnimationPerformerWithCompletion : AnimationPerformer {
-    func perform(command: AnimationCommand, on animatable: Animatable, using sheet: AnimationSheet, complete: @escaping AnimationPerformerCompletion)
+    func perform(command: AnimationCommand, on animatable: Animatable, using sheet: AnimationSheet?, complete: @escaping AnimationPerformerCompletion)
 }

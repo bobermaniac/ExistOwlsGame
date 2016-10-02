@@ -20,5 +20,6 @@ enum BuildInAnimation {
 
 enum AnimationCommand {
     case idle
+    case move(targetPoint: Point2D, time: TimeInterval)
     case walk(targetPoint: Point2D)
 }

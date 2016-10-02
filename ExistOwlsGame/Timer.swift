@@ -12,17 +12,27 @@ class Timer {
     var handler: EventHandler? = nil
     let name: String
     
-    var elapsed: TimeInterval
+    private(set) var elapsed: TimeInterval
     
-    init(withName name: String, elapsed: TimeInterval) {
-        self.elapsed = elapsed
+    init(withName name: String, interval: TimeInterval, repeating: Bool = false) {
+        self.interval = interval
+        self.elapsed = interval
+        self.repeating = repeating
         self.name = name
     }
     
     func update(_ interval: TimeInterval) {
+        guard self.elapsed > 0 else { return }
+        
         self.elapsed -= interval
-        if self.elapsed < 0 {
+        if self.elapsed <= 0 {
             handler?.handle(event: .timer(name: name))
+            if repeating {
+                elapsed = self.interval - elapsed
+            }
         }
     }
+    
+    private let repeating: Bool
+    private let interval: TimeInterval
 }

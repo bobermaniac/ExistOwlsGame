@@ -15,7 +15,9 @@ class IdleAnimationRunner : AnimationRunner {
         _direction = direction
     }
     
-    func run(on animatable: Animatable, sheet: AnimationSheet, completion: @escaping () -> Void) {
+    func run(on animatable: Animatable, sheet: AnimationSheet?, completion: @escaping () -> Void) {
+        guard let sheet = sheet else { return }
+        
         let animationType = sheet.sheetAnimation(for: .buildIn(type: .idle), direction: _direction)
         animatable.removeAllActions()
         animatable.run(sheet.animation(type: animationType!))

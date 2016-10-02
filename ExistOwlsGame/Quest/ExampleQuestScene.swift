@@ -76,7 +76,7 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
         
         switch type {
         case .idle:
-            timerPlayground.createTimer(name: "idle", elapsed: 1)
+            timerPlayground.createTimer(name: "idle", interval: 1)
             break
         default:
             break
@@ -92,7 +92,8 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
             _doPC(command: .idle, with: performer)
             if case let .tap(point: _, animatable: target) = event {
                 if let target = target {
-                    target.position2d = target.position2d + Transition2D(dx: 0, dy: -10)
+                    let point = target.position2d + Transition2D(dx: 0, dy: -50)
+                    performer.perform(command: .move(targetPoint: point, time: 10), on: target, using: nil)
                 }
             }
         default:
