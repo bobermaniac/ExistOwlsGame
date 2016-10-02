@@ -14,6 +14,11 @@
 		E701291E1D5FA2E400888258 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E701291D1D5FA2E400888258 /* Assets.xcassets */; };
 		E70129211D5FA2E400888258 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E701291F1D5FA2E400888258 /* LaunchScreen.storyboard */; };
 		E717A9581DA03D4300817285 /* GameplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E717A9571DA03D4300817285 /* GameplayKit.framework */; };
+		E717A95A1DA1351B00817285 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A9591DA1351B00817285 /* Event.swift */; };
+		E717A95C1DA1356400817285 /* Transition2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A95B1DA1356400817285 /* Transition2D.swift */; };
+		E717A95F1DA1377900817285 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A95E1DA1377900817285 /* Timer.swift */; };
+		E717A9611DA1388E00817285 /* SystemEventRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A9601DA1388E00817285 /* SystemEventRecognizer.swift */; };
+		E717A9631DA138AA00817285 /* TimerPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A9621DA138AA00817285 /* TimerPlayground.swift */; };
 		E76C1A081D911EF200941B4A /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A071D911EF200941B4A /* Animation.swift */; };
 		E76C1A0A1D911F0900941B4A /* AnimationPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A091D911F0900941B4A /* AnimationPerformer.swift */; };
 		E76C1A0C1D91AE9E00941B4A /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A0B1D91AE9E00941B4A /* Animatable.swift */; };
@@ -56,6 +61,11 @@
 		E70129201D5FA2E400888258 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E70129221D5FA2E400888258 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E717A9571DA03D4300817285 /* GameplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameplayKit.framework; path = System/Library/Frameworks/GameplayKit.framework; sourceTree = SDKROOT; };
+		E717A9591DA1351B00817285 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		E717A95B1DA1356400817285 /* Transition2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition2D.swift; sourceTree = "<group>"; };
+		E717A95E1DA1377900817285 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		E717A9601DA1388E00817285 /* SystemEventRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemEventRecognizer.swift; sourceTree = "<group>"; };
+		E717A9621DA138AA00817285 /* TimerPlayground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerPlayground.swift; sourceTree = "<group>"; };
 		E76C1A071D911EF200941B4A /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		E76C1A091D911F0900941B4A /* AnimationPerformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationPerformer.swift; sourceTree = "<group>"; };
 		E76C1A0B1D91AE9E00941B4A /* Animatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
@@ -120,6 +130,7 @@
 		E701290F1D5FA2E400888258 /* ExistOwlsGame */ = {
 			isa = PBXGroup;
 			children = (
+				E717A95D1DA135AF00817285 /* Base */,
 				E76C1A061D911ED700941B4A /* Animation */,
 				E76AE3DE1D89D3F600A4EC92 /* Events */,
 				E79832EF1D685204007E9868 /* SpriteKit */,
@@ -148,9 +159,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E717A95D1DA135AF00817285 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				E717A95B1DA1356400817285 /* Transition2D.swift */,
+				E76C1A1A1D91C4C100941B4A /* Point2D.swift */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
 		E76AE3DE1D89D3F600A4EC92 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				E717A9591DA1351B00817285 /* Event.swift */,
+				E717A95E1DA1377900817285 /* Timer.swift */,
+				E717A9601DA1388E00817285 /* SystemEventRecognizer.swift */,
+				E717A9621DA138AA00817285 /* TimerPlayground.swift */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -172,7 +196,6 @@
 				E76C1A091D911F0900941B4A /* AnimationPerformer.swift */,
 				E76C1A0B1D91AE9E00941B4A /* Animatable.swift */,
 				E76C1A161D91C45300941B4A /* DirectionQualifier.swift */,
-				E76C1A1A1D91C4C100941B4A /* Point2D.swift */,
 				E76C1A1C1D91C55C00941B4A /* Space2DScaleFactor.swift */,
 				E76C1A201D91C6D100941B4A /* AnimationRunner.swift */,
 			);
@@ -333,6 +356,7 @@
 				E7BB56051D67AD7C003019BE /* LoopIndex.swift in Sources */,
 				E70129171D5FA2E400888258 /* TestScene.swift in Sources */,
 				E79832F11D68523C007E9868 /* TextureSheet.swift in Sources */,
+				E717A95C1DA1356400817285 /* Transition2D.swift in Sources */,
 				E79832EC1D6850AC007E9868 /* ExampleQuestScene.swift in Sources */,
 				E7DD88091D63AB70009B9175 /* CircularBuffer.swift in Sources */,
 				E70129191D5FA2E400888258 /* GameViewController.swift in Sources */,
@@ -343,9 +367,13 @@
 				E76C1A251D91C77700941B4A /* MoveAnimationRunner.swift in Sources */,
 				E76C1A081D911EF200941B4A /* Animation.swift in Sources */,
 				E7DD88041D63A6D3009B9175 /* RunningAnimationPerformer.swift in Sources */,
+				E717A95F1DA1377900817285 /* Timer.swift in Sources */,
 				E7954AEB1D68833F0077F19A /* AnimationSheet.swift in Sources */,
 				E76C1A0C1D91AE9E00941B4A /* Animatable.swift in Sources */,
 				E76C1A151D91C43100941B4A /* Direction.swift in Sources */,
+				E717A9631DA138AA00817285 /* TimerPlayground.swift in Sources */,
+				E717A9611DA1388E00817285 /* SystemEventRecognizer.swift in Sources */,
+				E717A95A1DA1351B00817285 /* Event.swift in Sources */,
 				E76C1A0A1D911F0900941B4A /* AnimationPerformer.swift in Sources */,
 				E76C1A211D91C6D100941B4A /* AnimationRunner.swift in Sources */,
 				E7BB56031D67AC98003019BE /* AnimationTextureSource.swift in Sources */,

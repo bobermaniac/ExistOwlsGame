@@ -8,15 +8,6 @@
 
 import SpriteKit
 
-enum Event {
-    case nae
-    case tap(point: CGPoint, sprite: SKSpriteNode?)
-    case grab(sprite: SKSpriteNode)
-    case drag(delta: CGSize, sprite: SKSpriteNode?)
-    case drop
-    case executed(command: AnimationCommand)
-}
-
 protocol EventHandler {
     func handle(event: Event)
 }
@@ -25,10 +16,6 @@ protocol UserInputEventRecognizer : class {
     func touchesBegan(_ touches: Set<UITouch>, on scene: SKScene)
     func touchesMoved(_ touches: Set<UITouch>, on scene: SKScene)
     func touchesEnded(_ touches: Set<UITouch>, on scene: SKScene)
-}
-
-protocol SystemEventRecognizer : class {
-    func update(_ time: TimeInterval)
 }
 
 protocol AnimationEventRecognizer : class {
@@ -67,8 +54,8 @@ class SceneEventRecognizer : UserInputEventRecognizer {
         guard let touch = touches.first else { return }
         let c = touch.location(in: scene)
         let p = touch.previousLocation(in: scene)
-        let delta = CGSize(width: p.x - c.x, height: p.y - c.y)
-        delegate?.handle(event: .drag(delta: delta, sprite: nil))
+        let delta = Transition2D(dx: Double(p.x - c.x), dy: Double(p.y - c.y))
+        delegate?.handle(event: .drag(delta: delta, animatable: nil))
         _handlesGrab = true
     }
     
@@ -77,7 +64,7 @@ class SceneEventRecognizer : UserInputEventRecognizer {
         guard !_handlesGrab else { return }
         guard let touch = touches.first else { return }
         let sprite = _sprites(beneath: touch, on: scene).filter(_isActor).sorted(by: _isFirstSpriteHasGreaterZPos).first
-        let location = touch.location(in: scene)
-        delegate?.handle(event: .tap(point: location, sprite: sprite))
+        let location = Point2D(touch.location(in: scene))
+        delegate?.handle(event: .tap(point: location, animatable: sprite))
     }
 }

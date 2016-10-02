@@ -23,6 +23,7 @@ class ExampleTextureBatch {
 class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
     var eventRecognizer: SceneEventRecognizer = SceneEventRecognizer()
     var animationPerformer: AnimationPerformerWithCompletion = SKSceneAnimationPerformer()
+    var timerPlayground: TimerPlayground = TimerPlayground()
     // MARK: -
     
     private var _textures : ExampleTextureBatch!
@@ -33,6 +34,7 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
     override func didMove(to view: SKView) {
         eventRecognizer.delegate = self
         animationPerformer.events = self
+        timerPlayground.eventHandler = self
         
         _textures = ExampleTextureBatch()
         
@@ -56,21 +58,40 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
         self.eventRecognizer.touchesEnded(touches, on: self)
     }
     
+    private var lastTime: TimeInterval? = nil
+    
+    override func update(_ currentTime: TimeInterval) {
+        guard let lastTime = self.lastTime else {
+            self.lastTime = currentTime
+            return
+        }
+        timerPlayground.update(currentTime - lastTime)
+    }
+    
     // MARK: - AnimationEventRecognizer implementation
     
     func command(_ type: AnimationCommand, startedOn animatable: Animatable, causedBy event: Event) {
+        guard _PC === animatable else { return }
         
-    }
-    
-    func command(_ type: AnimationCommand, finishedOn animatable: Animatable, causedBy event: Event) {
-        let performer = animationPerformer.by(.executed(command: type))
         switch type {
-        case .walk(targetPoint: _):
-            performer.perform(command: .idle, on: animatable, using: _textures.PCAnimation)
+        case .idle:
+            timerPlayground.createTimer(name: "idle", elapsed: 3)
+            break
         default:
             break
         }
-
+    }
+    
+    func command(_ type: AnimationCommand, finishedOn animatable: Animatable, causedBy event: Event) {
+        guard _PC === animatable else { return }
+        let performer = animationPerformer.by(.executed(command: type))
+        
+        switch type {
+        case .walk(targetPoint: _):
+            _doPC(command: .idle, with: performer)
+        default:
+            break
+        }
     }
     
     // MARK: - EventHandler implementation
@@ -78,14 +99,18 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
     func handle(event: Event) {
         let performer = animationPerformer.by(event)
         switch event {
-        case .tap(point: let point, sprite: let optionalSprite):
-            if let sprite = optionalSprite {
-                _doPC(goto: sprite, with: performer)
+        case .tap(point: let point, animatable: let optAnimatable):
+            if let animatable = optAnimatable {
+                _doPC(goto: animatable, with: performer)
             } else {
-                _doPC(goto: Point2D(point), with: performer)
+                _doPC(goto: point, with: performer)
             }
-        case .drag(delta: let delta, sprite: _):
+        case .drag(delta: let delta, animatable: _):
             _doCamera(drag: delta)
+        case .timer(name: let name):
+            if name == "idle" {
+                
+            }
         default:
             break
         }
@@ -94,14 +119,23 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
     // MARK: - Animations
     
     private func _doPC(goto point: Point2D, with performer: AnimationPerformer) {
-        performer.perform(command: .walk(targetPoint: point), on: _PC, using: _textures.PCAnimation)
+        _doPC(command: .walk(targetPoint: point), with: performer)
     }
     
-    private func _doPC(goto sprite: SKSpriteNode, with performer: AnimationPerformer) {
+    private func _doPC(goto sprite: Animatable, with performer: AnimationPerformer) {
         _doPC(goto: sprite.position2d, with: performer)
     }
     
-    private func _doCamera(drag offset: CGSize) {
-        _mainCamera.position = _mainCamera.position.applying(CGAffineTransform.init(translationX: offset.width, y: offset.height))
+    private func _doPC(idleWith performer: AnimationPerformer) {
+        _doPC(command: .idle, with: performer)
+    }
+    
+    private func _doPC(command: AnimationCommand, with performer: AnimationPerformer) {
+        performer.perform(command: command, on: _PC, using: _textures.PCAnimation)
+    }
+
+    private func _doCamera(drag offset: Transition2D) {
+        let transition = offset.cgSize
+        _mainCamera.position = _mainCamera.position.applying(CGAffineTransform.init(translationX: transition.width, y: transition.height))
     }
 }
