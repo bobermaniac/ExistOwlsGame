@@ -23,7 +23,7 @@ class ExampleTextureBatch {
 class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
     var eventRecognizer: SceneEventRecognizer = SceneEventRecognizer()
     var animationPerformer: AnimationPerformerWithCompletion = SKSceneAnimationPerformer()
-    var timerPlayground: TimerPlayground = TimerPlayground()
+    var timers: Timers = Timers()
     // MARK: -
     
     private var _textures : ExampleTextureBatch!
@@ -34,7 +34,7 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
     override func didMove(to view: SKView) {
         eventRecognizer.delegate = self
         animationPerformer.events = self
-        timerPlayground.eventHandler = self
+        timers.eventHandler = self
         
         _textures = ExampleTextureBatch()
         
@@ -66,7 +66,7 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
         guard let lastTime = self.lastTime else {
             return
         }
-        timerPlayground.update(currentTime - lastTime)
+        timers.update(currentTime - lastTime)
     }
     
     // MARK: - AnimationEventRecognizer implementation
@@ -76,7 +76,7 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
         
         switch type {
         case .idle:
-            timerPlayground.createTimer(name: "idle", interval: 1)
+            timers.createTimer(name: "idle", interval: 1)
             break
         default:
             break
@@ -139,7 +139,7 @@ class ExampleQuestScene : SKScene, EventHandler, AnimationEventRecognizer {
     }
     
     private func _doPC(command: AnimationCommand, with performer: AnimationPerformer) {
-        timerPlayground.dismissTimer(name: "idle")
+        timers.dismissTimer(name: "idle")
         performer.perform(command: command, on: _PC, using: _textures.PCAnimation)
     }
 

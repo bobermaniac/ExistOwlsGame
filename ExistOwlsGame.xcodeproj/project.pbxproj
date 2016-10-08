@@ -16,9 +16,9 @@
 		E717A9581DA03D4300817285 /* GameplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E717A9571DA03D4300817285 /* GameplayKit.framework */; };
 		E717A95A1DA1351B00817285 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A9591DA1351B00817285 /* Event.swift */; };
 		E717A95C1DA1356400817285 /* Transition2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A95B1DA1356400817285 /* Transition2D.swift */; };
-		E717A95F1DA1377900817285 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A95E1DA1377900817285 /* Timer.swift */; };
+		E717A95F1DA1377900817285 /* TimerWatchdog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A95E1DA1377900817285 /* TimerWatchdog.swift */; };
 		E717A9611DA1388E00817285 /* SystemEventRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A9601DA1388E00817285 /* SystemEventRecognizer.swift */; };
-		E717A9631DA138AA00817285 /* TimerPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A9621DA138AA00817285 /* TimerPlayground.swift */; };
+		E717A9631DA138AA00817285 /* Timers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717A9621DA138AA00817285 /* Timers.swift */; };
 		E72FA68D1DA17E47004A93BC /* MoveAnimationRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72FA68C1DA17E47004A93BC /* MoveAnimationRunner.swift */; };
 		E76C1A081D911EF200941B4A /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A071D911EF200941B4A /* Animation.swift */; };
 		E76C1A0A1D911F0900941B4A /* AnimationPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76C1A091D911F0900941B4A /* AnimationPerformer.swift */; };
@@ -64,9 +64,9 @@
 		E717A9571DA03D4300817285 /* GameplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameplayKit.framework; path = System/Library/Frameworks/GameplayKit.framework; sourceTree = SDKROOT; };
 		E717A9591DA1351B00817285 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		E717A95B1DA1356400817285 /* Transition2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition2D.swift; sourceTree = "<group>"; };
-		E717A95E1DA1377900817285 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		E717A95E1DA1377900817285 /* TimerWatchdog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerWatchdog.swift; sourceTree = "<group>"; };
 		E717A9601DA1388E00817285 /* SystemEventRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemEventRecognizer.swift; sourceTree = "<group>"; };
-		E717A9621DA138AA00817285 /* TimerPlayground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerPlayground.swift; sourceTree = "<group>"; };
+		E717A9621DA138AA00817285 /* Timers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timers.swift; sourceTree = "<group>"; };
 		E72FA68C1DA17E47004A93BC /* MoveAnimationRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveAnimationRunner.swift; sourceTree = "<group>"; };
 		E76C1A071D911EF200941B4A /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		E76C1A091D911F0900941B4A /* AnimationPerformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationPerformer.swift; sourceTree = "<group>"; };
@@ -174,9 +174,9 @@
 			isa = PBXGroup;
 			children = (
 				E717A9591DA1351B00817285 /* Event.swift */,
-				E717A95E1DA1377900817285 /* Timer.swift */,
+				E717A95E1DA1377900817285 /* TimerWatchdog.swift */,
 				E717A9601DA1388E00817285 /* SystemEventRecognizer.swift */,
-				E717A9621DA138AA00817285 /* TimerPlayground.swift */,
+				E717A9621DA138AA00817285 /* Timers.swift */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -371,11 +371,11 @@
 				E76C1A251D91C77700941B4A /* WalkAnimationRunner.swift in Sources */,
 				E76C1A081D911EF200941B4A /* Animation.swift in Sources */,
 				E7DD88041D63A6D3009B9175 /* RunningAnimationPerformer.swift in Sources */,
-				E717A95F1DA1377900817285 /* Timer.swift in Sources */,
+				E717A95F1DA1377900817285 /* TimerWatchdog.swift in Sources */,
 				E7954AEB1D68833F0077F19A /* AnimationSheet.swift in Sources */,
 				E76C1A0C1D91AE9E00941B4A /* Animatable.swift in Sources */,
 				E76C1A151D91C43100941B4A /* Direction.swift in Sources */,
-				E717A9631DA138AA00817285 /* TimerPlayground.swift in Sources */,
+				E717A9631DA138AA00817285 /* Timers.swift in Sources */,
 				E717A9611DA1388E00817285 /* SystemEventRecognizer.swift in Sources */,
 				E717A95A1DA1351B00817285 /* Event.swift in Sources */,
 				E76C1A0A1D911F0900941B4A /* AnimationPerformer.swift in Sources */,

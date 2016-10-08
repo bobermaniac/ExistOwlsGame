@@ -12,7 +12,7 @@ class SKSceneAnimationPerformer : AnimationPerformerWithCompletion {
     var events: AnimationEventRecognizer?
     
     func perform(command: AnimationCommand, on animatable: Animatable, using sheet: AnimationSheet?, complete: @escaping AnimationPerformerCompletion) {
-        var runner: AnimationRunner?
+        let runner: AnimationRunner
         switch command {
         case .idle:
             runner = IdleAnimationRunner(direction: animatable.direction)
@@ -21,7 +21,7 @@ class SKSceneAnimationPerformer : AnimationPerformerWithCompletion {
         case .move(targetPoint: let targetPoint, time: let time):
             runner = MoveAnimationRunner(targetPoint: targetPoint, time: time)
         }
-        runner?.run(on: animatable, sheet: sheet, completion: complete)
+        runner.run(on: animatable, sheet: sheet, completion: complete)
     }
 }
 

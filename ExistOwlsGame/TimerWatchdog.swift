@@ -9,10 +9,10 @@
 import Foundation
 
 protocol TimerEventHandler {
-    func onTimerExausted(_ timer: Timer)
+    func onTimerExausted(_ timer: TimerWatchdog)
 }
 
-class Timer {
+class TimerWatchdog {
     var handler: TimerEventHandler? = nil
     
     let name: String

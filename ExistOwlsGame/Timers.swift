@@ -8,27 +8,27 @@
 
 import Foundation
 
-class TimerPlayground: SystemEventRecognizer {
+class Timers: SystemEventRecognizer {
     private struct TimerPlaygroundEventHandler: TimerEventHandler {
-        private unowned let playground: TimerPlayground
+        private unowned let playground: Timers
         
-        init(playground: TimerPlayground) {
+        init(playground: Timers) {
             self.playground = playground
         }
         
-        func onTimerExausted(_ timer: Timer) {
+        func onTimerExausted(_ timer: TimerWatchdog) {
             playground._onTimer(name: timer.name)
         }
     }
     
     var eventHandler: EventHandler? = nil
     
-    private var timers: [ Timer ] = []
+    private var timers: [ TimerWatchdog ] = []
     
     func createTimer(name: String, interval: TimeInterval) {
         dismissTimer(name: name)
         
-        let timer = Timer(withName: name, interval: interval)
+        let timer = TimerWatchdog(withName: name, interval: interval)
         timer.handler = TimerPlaygroundEventHandler(playground: self)
         timers.append(timer)
     }
